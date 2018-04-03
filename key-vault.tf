@@ -10,5 +10,5 @@ module "cmc-vault" {
 }
 
 output "vaultName" {
-  value = "${module.cmc-vault.name}"
+  value = "${module.cmc-vault.key_vault_name}"
 }
