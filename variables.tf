@@ -1,5 +1,6 @@
 variable "product" {
   type = "string"
+  default = "cmc"
 }
 
 variable "location" {
