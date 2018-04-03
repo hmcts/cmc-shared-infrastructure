@@ -8,3 +8,7 @@ module "cmc-vault" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
   product_group_object_id = "68839600-92da-4862-bb24-1259814d1384"
 }
+
+output "vaultName" {
+  value = "${module.cmc-vault.name}"
+}
