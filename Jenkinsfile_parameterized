@@ -9,5 +9,4 @@ properties([
 		])
 ])
 
-withInfrastructurePipeline('cmc', params.ENVIRONMENT, 'sandbox') {
-}
+withInfrastructurePipeline('cmc', params.ENVIRONMENT, 'sandbox')
