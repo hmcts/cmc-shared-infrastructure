@@ -1,0 +1,16 @@
+#!groovy
+//noinspection GroovyUnusedAssignment
+@Library("Infrastructure@feature/ROC-3460-One-app-insights-per-product") _
+
+import uk.gov.hmcts.contino.Environment
+
+Environment environment = new Environment(env)
+
+onMaster {
+  sharedInfrastructurePipeline('cmc', environment.nonProdName, 'prod')
+  sharedInfrastructurePipeline('cmc', environment.prodrodName, 'prod')
+}
+
+onDemo {
+  sharedInfrastructurePipeline('cmc', environment.demoName, 'prod')
+}
