@@ -10,8 +10,3 @@ module "cmc-bulk-print-failures" {
   email_receiver_name = "Andy"
   email_receiver_address = "andrew.walker@hmcts.net"
 }
-
-output "alertName" {
-  value = "${module.cmc-bulk-print-failures.alertName}"
-}
-
