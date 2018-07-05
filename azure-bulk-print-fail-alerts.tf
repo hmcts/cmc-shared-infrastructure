@@ -1,6 +1,6 @@
 module "cmc-bulk-print-failures" {
   source = "git@github.com:andrewwa-kainos/moj-module-action-group"
-  location = "${var.location}"
+  location = "global"
   env = "${var.env}"
   subscription = "DCD-CFT-Sandbox"
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
