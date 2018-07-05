@@ -2,6 +2,7 @@ module "cmc-bulk-print-failures" {
   source = "git@github.com:andrewwa-kainos/moj-module-action-group"
   location = "${var.location}"
   env = "${var.env}"
+  subscription = "DCD-CFT-Sandbox"
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
   group_name = "BPF_${var.env}"
   alert_name = "Bulk Print Fail Alert - ${var.env}"
