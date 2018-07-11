@@ -1,5 +1,5 @@
 module "cmc-bulk-print-fail-action-group" {
-  source = "git@github.com:hmcts/moj-module-action-group"
+  source = "git@github.com:hmcts/cnp-module-action-group"
   location = "${var.location}"
   env = "${var.env}"
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
