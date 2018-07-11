@@ -11,7 +11,7 @@ module "cmc-bulk-print-fail-alert" {
   frequency_in_minutes = 5
   time_window_in_minutes = 5
   severity_level = "3"
-  action_group_name = "BPF_alert"
+  action_group_name = "Bulk Print Fail Alert - ${var.env}"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
   resourcegroup_name = "${var.env == "prod" ? "cmc-prod" : "cmc-sandbox"}"
