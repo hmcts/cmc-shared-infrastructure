@@ -1,6 +1,6 @@
 module "cmc-bulk-print-fail-action-group" {
   source = "git@github.com:hmcts/cnp-module-action-group?ref=feature/ROC-3821"
-  location = "${var.location}"
+  location = "global"
   env = "${var.env}"
   template_name = "bulkprintfail_actiongroup_${var.env}"
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
