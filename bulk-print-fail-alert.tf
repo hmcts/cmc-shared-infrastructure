@@ -3,6 +3,7 @@ module "cmc-bulk-print-fail-alert" {
 
   app_insights_name = "${var.env == "prod" ? "cmc-prod" : "cmc-sandbox"}"
 
+  template_name = "bulkprintfail_alert_${var.env}"
   alert_name = "Bulk print failure"
   alert_desc = "Triggers when a bulk print failure event is received in a 5 minute poll."
   app_insights_query = "customEvents | where name == \"Bulk print failed\""
