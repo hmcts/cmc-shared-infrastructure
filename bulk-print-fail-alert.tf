@@ -2,7 +2,7 @@ module "cmc-bulk-print-fail-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert?ref=feature/ROC-3821_custom-email-subject"
   location = "westeurope"
 
-  app_insights_name = "${var.env == "prod" ? "cmc-prod" : "cmc-sandbox"}"
+  app_insights_name = "cmc-${var.env}"
 
   alert_name = "Bulk print failure - CMC"
   alert_desc = "Triggers when a bulk print failure event is received from CMC in a 5 minute poll."
@@ -14,5 +14,5 @@ module "cmc-bulk-print-fail-alert" {
   custom_email_subject = "CMC Bulk Print Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
-  resourcegroup_name = "${var.env == "prod" ? "cmc-prod" : "cmc-sandbox"}"
+  resourcegroup_name = "cmc-${var.env}"
 }
