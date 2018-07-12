@@ -1,5 +1,5 @@
 module "cmc-bulk-print-fail-action-group" {
-  source = "git@github.com:hmcts/cnp-module-action-group?ref=feature/ROC-3821"
+  source = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env = "${var.env}"
 
