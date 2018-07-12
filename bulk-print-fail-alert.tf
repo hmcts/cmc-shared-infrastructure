@@ -1,5 +1,5 @@
 module "cmc-bulk-print-fail-alert" {
-  source = "git@github.com:hmcts/moj-module-metric-alert?ref=feature/ROC-3821"
+  source = "git@github.com:hmcts/cnp-module-metric-alert"
   location = "westeurope"
 
   app_insights_name = "${var.env == "prod" ? "cmc-prod" : "cmc-sandbox"}"
