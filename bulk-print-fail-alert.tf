@@ -1,6 +1,6 @@
 module "cmc-bulk-print-fail-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
-  location = "${var.location}"
+  location = "global"
 
   app_insights_name = "cmc-${var.env}"
 
@@ -10,7 +10,7 @@ module "cmc-bulk-print-fail-alert" {
   frequency_in_minutes = 5
   time_window_in_minutes = 5
   severity_level = "3"
-  action_group_name = "Bulk Print Fail Alert - ${var.env}"
+  action_group_name = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
   custom_email_subject = "CMC Bulk Print Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
