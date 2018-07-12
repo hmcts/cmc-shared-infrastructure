@@ -1,5 +1,5 @@
 module "cmc-bulk-print-fail-alert" {
-  source = "git@github.com:hmcts/cnp-module-metric-alert"
+  source = "git@github.com:hmcts/cnp-module-metric-alert?ref=feature/ROC-3821_custom-email-subject"
   location = "global"
 
   app_insights_name = "cmc-${var.env}"
