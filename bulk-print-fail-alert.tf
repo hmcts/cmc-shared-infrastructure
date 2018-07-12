@@ -14,5 +14,5 @@ module "cmc-bulk-print-fail-alert" {
   custom_email_subject = "CMC Bulk Print Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
-  resourcegroup_name = "cmc-${var.env}"
+  resourcegroup_name = "${azurerm_resource_group.rg.name}"
 }
