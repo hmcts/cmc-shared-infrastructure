@@ -1,6 +1,6 @@
 module "cmc-bulk-print-fail-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
-  location = "global"
+  location = "${var.location}"
 
   app_insights_name = "cmc-${var.env}"
 
@@ -14,12 +14,5 @@ module "cmc-bulk-print-fail-alert" {
   custom_email_subject = "CMC Bulk Print Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
-  resourcegroup_name = "${azurerm_resource_group.rg.name}"
-}
-
-resource "azurerm_template_deployment" "bpf_alert" {
-  deployment_mode = "Incremental"
-  name = "${module.cmc-bulk-print-fail-alert.alert_name}"
-  resource_group_name = "${module.cmc-bulk-print-fail-alert.resourcegroup_name}"
-  depends_on = ["azurerm_template_deployment.action_group"]
+  resourcegroup_name = "cmc-${var.env}"
 }
