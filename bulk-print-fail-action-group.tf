@@ -7,6 +7,5 @@ module "cmc-bulk-print-fail-action-group" {
   action_group_name = "Bulk Print Fail Alert - ${var.env}"
   short_name = "BPF_alert"
   email_receiver_name = "Bulk Print Alerts"
-//  email_receiver_address = "cmc-bulk-print-alerts@hmcts.net" - disable for testing
-  email_receiver_address = "andrew.walker@hmcts.net"
+  email_receiver_address = "cmc-bulk-print-alerts@hmcts.net"
 }
