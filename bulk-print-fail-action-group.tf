@@ -2,7 +2,7 @@ module "cmc-bulk-print-fail-action-group" {
   source = "git@github.com:hmcts/cnp-module-action-group?ref=feature/ROC-3821"
   location = "global"
   env = "${var.env}"
-  template_name = "bulkprintfail_actiongroup_${var.env}"
+
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
   action_group_name = "Bulk Print Fail Alert - ${var.env}"
   short_name = "BPF_alert"
