@@ -11,8 +11,7 @@ data "azurerm_key_vault_secret" "bpf_email_secret" {
 
 module "cmc-bulk-print-fail-action-group" {
   source = "git@github.com:hmcts/cnp-module-action-group"
-//  location = "${var.location}" - hardcode for testing
-  location = "global"
+  location = "${(var.env == "prod") ? var.location : "global"}"
   env = "${var.env}"
 
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
