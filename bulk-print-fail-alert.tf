@@ -1,6 +1,6 @@
 module "cmc-bulk-print-fail-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
-  location = "${(var.env == "prod") ? var.location : "global"}"
+  location = "${(var.env == "prod") ? var.location : "uksouth"}"
 
   app_insights_name = "cmc-${var.env}"
 
