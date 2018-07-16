@@ -1,11 +1,11 @@
 
 data "azurerm_key_vault" "cmc_key_vault" {
-  name = "cmc-sandbox"
-  resource_group_name = "cmc-sandbox"
+  name = "cmc-${var.env}"
+  resource_group_name = "cmc-${var.env}"
 }
 
 data "azurerm_key_vault_secret" "bpf_email_secret" {
-  name = "bpf-alert-email"
+  name = "bulk-print-failure-email"
   vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
 }
 
