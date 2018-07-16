@@ -1,3 +1,5 @@
+provider "azurerm" {}
+
 data "vault_generic_secret" "bpf_address" {
   path = "secrets/bpf-alert-email"
 }
