@@ -11,5 +11,5 @@ module "cmc-bulk-print-fail-action-group" {
   action_group_name = "Bulk Print Fail Alert - ${var.env}"
   short_name = "BPF_alert"
   email_receiver_name = "Bulk Print Alerts"
-  email_receiver_address = "${data.vault_generic_secret.bpf_address}"
+  email_receiver_address = "${data.vault_generic_secret.bpf_address.data}"
 }
