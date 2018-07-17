@@ -10,7 +10,7 @@ data "azurerm_key_vault_secret" "bpf_email_secret" {
 }
 
 module "cmc-bulk-print-fail-action-group" {
-  source = "git@github.com:hmcts/cnp-module-action-group"
+  source = "git@github.com:hmcts/cnp-module-action-group?ref=feature/ROC-3821"
   location = "${(var.env == "prod") ? var.location : "global"}"
   env = "${var.env}"
 
@@ -19,4 +19,8 @@ module "cmc-bulk-print-fail-action-group" {
   short_name = "BPF_alert"
   email_receiver_name = "Bulk Print Alerts"
   email_receiver_address = "${data.azurerm_key_vault_secret.bpf_email_secret.value}"
+}
+
+output "action_group_name" {
+  value = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
 }
