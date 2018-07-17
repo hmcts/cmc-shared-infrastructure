@@ -1,7 +1,7 @@
 
 data "azurerm_key_vault" "cmc_key_vault" {
   name = "cmc-${var.env}"
-  resource_group_name = "cmc-${var.env}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 }
 
 data "azurerm_key_vault_secret" "bpf_email_secret" {

@@ -1,8 +1,7 @@
 module "cmc-bulk-print-fail-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
-  location = "West Europe"
-
-  app_insights_name = "cmc-${var.env}"
+  location = "${azurerm_application_insights.appinsights.location}"
+  app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
   alert_name = "Bulk print failure - CMC"
   alert_desc = "Triggers when a bulk print failure event is received from CMC in a 5 minute poll."
