@@ -1,6 +1,6 @@
 
 data "azurerm_key_vault" "cmc_key_vault" {
-  name = "cmc-${var.env}"
+  name = "cmc-${(var.env == "prod") ? "vault" : var.env}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 }
 
