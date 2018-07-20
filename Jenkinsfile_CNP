@@ -8,9 +8,6 @@ Environment environment = new Environment(env)
 
 onMaster {
   sharedInfrastructurePipeline('cmc', environment.nonProdName, 'nonprod')
-  sharedInfrastructurePipeline('cmc', environment.prodName, 'prod')
-}
-
-onDemo {
   sharedInfrastructurePipeline('cmc', environment.demoName, 'nonprod')
+  sharedInfrastructurePipeline('cmc', environment.prodName, 'prod')
 }
