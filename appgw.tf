@@ -128,13 +128,3 @@ module "appGwSouth" {
     }
    ]
 }
-
-resource "null_resource" "httpsCert" {
-  triggers {
-    cert = "${azurerm_resource_group.rg.name}"
-  }
-
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.web.private_ip} >> private_ips.txt"
-  }
-}
