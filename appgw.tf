@@ -8,7 +8,7 @@ module "appGwSouth" {
   resourcegroupname  = "${azurerm_resource_group.rg.name}"
   team_name          = "${var.team_name}"
   team_contact       = "${var.team_contact}"
-  destroy_me         = "${var.destroy_me}"
+  destroy_me         = "false"
   ilbIp              = "${module.appServicePlanA.ilbIp}"
   //storageAccountName = "${var.product}sa"
 
