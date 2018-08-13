@@ -21,7 +21,7 @@ module "appGwSouth" {
   ]
 
   # ssl cert - this is an aribitrary unused cert which is over written.
-  sslCertificates = ["core-infra-sandbox", "core-infra-saat"]
+  sslCertificates = ["core-compute-sandbox", "core-compute-saat"]
 
   # Http Listeners
   httpListeners = [
