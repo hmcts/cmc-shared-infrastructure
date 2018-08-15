@@ -1,4 +1,5 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "${var.product}-${var.env}"
+  // TODO change this back to product-env
+  name     = "${var.product}-${var.env}-shared-infrastructure"
   location = "${var.location}"
 }
