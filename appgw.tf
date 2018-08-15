@@ -89,7 +89,7 @@ module "appGwSouth" {
   # Backend address Pools
   backendAddressPools = [
     {
-      name = "${var.product}-${var.env}"
+      name = "citizen-frontend-${var.env}"
 
       backendAddresses = [
         {
