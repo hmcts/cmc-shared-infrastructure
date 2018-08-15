@@ -19,7 +19,7 @@ module "appGwSouth" {
   team_name = "${var.team_name}"
   team_contact = "${var.team_contact}"
   destroy_me = "false"
-  ilbIp = "${module.appServicePlanA.ilbIp}"
+  ilbIp = "${var.ilbIp}"
 
   # vNet connections
   gatewayIpConfigurations = [
@@ -88,7 +88,7 @@ module "appGwSouth" {
 
       backendAddresses = [
         {
-          fqdn = "${module.appServicePlanA.ilbIp}"
+          fqdn = "${var.ilbIp}"
         },
       ]
     },
