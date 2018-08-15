@@ -51,5 +51,7 @@ variable "name" {
 
 variable "asp_capacity" {
   default = 2
-  
 }
+
+variable "citizen_external_hostname" {}
+variable "legal_external_hostname" {}
