@@ -9,8 +9,8 @@ data "azurerm_key_vault_secret" "legal-cert" {
 }
 
 locals {
-  citizen_cert_suffix = "${var.env == "sandbox" || var.env == "saat" || var.env == "sprod" ? "-citizen" : ""}"
-  legal_cert_suffix = "${var.env == "sandbox" || var.env == "saat" || var.env == "sprod" ? "-legal" : ""}"
+  citizen_cert_suffix = "${var.env != "prod" ? "-citizen" : ""}"
+  legal_cert_suffix = "${var.env != "prod" ? "-legal" : ""}"
 }
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
