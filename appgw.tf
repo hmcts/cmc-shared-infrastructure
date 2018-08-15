@@ -107,7 +107,7 @@ module "appGwSouth" {
       CookieBasedAffinity = "Disabled"
       AuthenticationCertificates = ""
       probeEnabled = "True"
-      probe = "http-probe"
+      probe = "citizen-http-probe"
       PickHostNameFromBackendAddress = "False"
       HostName = "${var.citizen_external_hostname}"
     },
@@ -118,7 +118,7 @@ module "appGwSouth" {
       CookieBasedAffinity = "Disabled"
       AuthenticationCertificates = "ilbCert"
       probeEnabled = "True"
-      probe = "https-probe"
+      probe = "citizen-https-probe"
       PickHostNameFromBackendAddress = "True"
       Host = "${var.citizen_external_hostname}"
 
@@ -162,7 +162,7 @@ module "appGwSouth" {
   probes = [
     # Citizen
     {
-      name = "http-probe"
+      name = "citizen-http-probe"
       protocol = "Http"
       path = "/"
       interval = 30
@@ -173,7 +173,7 @@ module "appGwSouth" {
       host = "${var.citizen_external_hostname}"
     },
     {
-      name = "https-probe"
+      name = "citizen-https-probe"
       protocol = "Https"
       path = "/"
       interval = 30
@@ -186,7 +186,7 @@ module "appGwSouth" {
 
     # Legal
     {
-      name = "http-probe"
+      name = "legal-http-probe"
       protocol = "Http"
       path = "/"
       interval = 30
@@ -197,7 +197,7 @@ module "appGwSouth" {
       host = "${var.legal_external_hostname}"
     },
     {
-      name = "https-probe"
+      name = "legal-https-probe"
       protocol = "Https"
       path = "/"
       interval = 30
