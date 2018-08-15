@@ -8,6 +8,7 @@ locals {
   }
 }
 
+// TODO remove this
 module "appServicePlanA" {
   source              = "git@github.com:hmcts/moj-module-app-service-plan?ref=infra_versions"
   location            = "UK South"

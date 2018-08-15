@@ -1,6 +1,6 @@
-data "azurerm_key_vault_secret" "cert" {
-  name = "STAR-${var.env}-platform-hmcts-net"
-  vault_uri = "https://infra-vault-${var.subscription}.vault.azure.net/"
+data "azurerm_key_vault_secret" "citizen-cert" {
+  name = "${var.citizen_external_cert_name}"
+  vault_uri = "${var.citizen_external_cert_vault_uri}"
 }
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
@@ -27,7 +27,7 @@ module "appGwSouth" {
   sslCertificates = [
     {
       name = "STAR-${var.env}-platform-hmcts-net"
-      data = "${data.azurerm_key_vault_secret.cert.value}"
+      data = "${data.azurerm_key_vault_secret.citizen-cert.value}"
       password = ""
     }
   ]
