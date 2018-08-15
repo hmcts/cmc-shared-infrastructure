@@ -1,5 +1,5 @@
 data "azurerm_key_vault_secret" "cert" {
-  name      = "STAR-saat-platform-hmcts-net"
+  name      = "STAR-${var.env}-platform-hmcts-net"
   vault_uri = "https://infra-vault-${var.subscription}.vault.azure.net/"
 }
 
