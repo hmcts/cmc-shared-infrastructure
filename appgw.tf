@@ -1,3 +1,8 @@
+data "azurerm_key_vault_secret" "cert" {
+  name      = "STAR-saat-platform-hmcts-net"
+  vault_uri = "https://infra-vault-${var.subscription}.vault.azure.net/"
+}
+
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
   source             = "git@github.com:hmcts/moj-module-waf?ref=stripDownWf"
@@ -21,7 +26,13 @@ module "appGwSouth" {
   ]
 
   # ssl cert - this is an aribitrary unused cert which is over written.
-  sslCertificates = ["core-compute-sandbox", "core-compute-saat"]
+    sslCertificates = [
+    {
+      name = "STAR-${var.env}-platform-hmcts-net"
+      data = "${data.azurerm_key_vault_secret.cert.value}"
+      password = ""
+    }
+  ]
 
   # Http Listeners
   httpListeners = [
@@ -38,7 +49,7 @@ module "appGwSouth" {
       FrontendIPConfiguration = "appGatewayFrontendIP"
       FrontendPort            = "frontendPort443"
       Protocol                = "Https"
-      SslCertificate          = "${var.env}-cert"
+      SslCertificate          = "STAR-${var.env}-platform-hmcts-net"
       hostName                = "${var.product}.${var.env}.platform.hmts.net"
     },
   ]
