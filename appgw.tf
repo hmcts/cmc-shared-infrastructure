@@ -8,6 +8,11 @@ data "azurerm_key_vault_secret" "legal-cert" {
   vault_uri = "${var.legal_external_cert_vault_uri}"
 }
 
+locals {
+  citizen_cert_suffix = "${var.env == "sandbox" || var.env == "saat" || var.env == "sprod" ? "-citizen" : ""}"
+  legal_cert_suffix = "${var.env == "sandbox" || var.env == "saat" || var.env == "sprod" ? "-legal" : ""}"
+}
+
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
   source = "git@github.com:hmcts/cnp-module-waf?ref=stripDownWf"
@@ -31,12 +36,12 @@ module "appGwSouth" {
 
   sslCertificates = [
     {
-      name = "${var.citizen_external_cert_name}"
+      name = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
       data = "${data.azurerm_key_vault_secret.citizen-cert.value}"
       password = ""
     },
     {
-      name = "${var.legal_external_cert_name}"
+      name = "${var.legal_external_cert_name}${local.legal_cert_suffix}"
       data = "${data.azurerm_key_vault_secret.legal-cert.value}"
       password = ""
     }
@@ -58,7 +63,7 @@ module "appGwSouth" {
       FrontendIPConfiguration = "appGatewayFrontendIP"
       FrontendPort = "frontendPort443"
       Protocol = "Https"
-      SslCertificate = "${var.citizen_external_cert_name}"
+      SslCertificate = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
       hostName = "${var.citizen_external_hostname}"
     },
 
@@ -76,7 +81,7 @@ module "appGwSouth" {
       FrontendIPConfiguration = "appGatewayFrontendIP"
       FrontendPort = "frontendPort443"
       Protocol = "Https"
-      SslCertificate = "${var.legal_external_cert_name}"
+      SslCertificate = "${var.legal_external_cert_name}${local.legal_cert_suffix}"
       hostName = "${var.legal_external_hostname}"
     }
   ]
