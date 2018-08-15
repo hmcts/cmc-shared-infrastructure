@@ -89,7 +89,7 @@ module "appGwSouth" {
   # Backend address Pools
   backendAddressPools = [
     {
-      name = "citizen-frontend-${var.env}"
+      name = "${var.product}-${var.env}"
 
       backendAddresses = [
         {
@@ -131,14 +131,14 @@ module "appGwSouth" {
       name = "citizen-http"
       RuleType = "Basic"
       httpListener = "citizen-http-listener"
-      backendAddressPool = "citizen-frontend-${var.env}"
+      backendAddressPool = "${var.product}-${var.env}"
       backendHttpSettings = "backend-80"
     },
     {
       name = "citizen-https"
       RuleType = "Basic"
       httpListener = "citizen-https-listener"
-      backendAddressPool = "citizen-frontend-${var.env}"
+      backendAddressPool = "${var.product}-${var.env}"
       backendHttpSettings = "backend-443"
     },
 
@@ -147,14 +147,14 @@ module "appGwSouth" {
       name = "legal-http"
       RuleType = "Basic"
       httpListener = "legal-http-listener"
-      backendAddressPool = "legal-frontend-${var.env}"
+      backendAddressPool = "${var.product}-${var.env}"
       backendHttpSettings = "backend-80"
     },
     {
       name = "legal-https"
       RuleType = "Basic"
       httpListener = "legal-https-listener"
-      backendAddressPool = "legal-frontend-${var.env}"
+      backendAddressPool = "${var.product}-${var.env}"
       backendHttpSettings = "backend-443"
     }
   ]
