@@ -119,7 +119,7 @@ module "appGwSouth" {
       AuthenticationCertificates = "ilbCert"
       probeEnabled = "True"
       probe = "citizen-https-probe"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       Host = "${var.citizen_external_hostname}"
 
     }
