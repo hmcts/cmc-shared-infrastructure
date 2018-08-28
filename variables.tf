@@ -51,6 +51,14 @@ variable "asp_capacity" {
   default = 2
 }
 
+variable "asp_name" {
+  default = "cmc-citizen-frontend"
+}
+
+variable "asp_rg" {
+  default = "cmc-citizen-frontend-shared-infrastructure"
+}
+
 variable "citizen_external_hostname" {}
 variable "citizen_external_cert_name" {}
 variable "citizen_external_cert_vault_uri" {}
