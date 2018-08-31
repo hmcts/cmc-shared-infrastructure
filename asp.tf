@@ -5,8 +5,6 @@ locals {
   }
 }
 
-
-
 module "appServicePlan" {
 
   source = "git@github.com:hmcts/cnp-module-app-service-plan?ref=master"
