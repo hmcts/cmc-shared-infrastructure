@@ -15,6 +15,8 @@ variable "appinsights_location" {
   description = "Location for Application Insights"
 }
 
+variable "common_tags" {}
+
 variable "env" {
   type = "string"
 }
@@ -40,7 +42,7 @@ variable "team_name" {
 }
 
 variable "team_contact" {
-  default = ""
+  default = "#cmc-tech"
 }
 
 variable "name" {
