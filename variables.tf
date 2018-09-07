@@ -1,7 +1,4 @@
-variable "product" {
-  type = "string"
-  default = "cmc"
-}
+variable "product" {}
 
 variable "location" {
   type = "string"
@@ -15,9 +12,11 @@ variable "appinsights_location" {
   description = "Location for Application Insights"
 }
 
-variable "env" {
-  type = "string"
+variable "common_tags" {
+  type = "map"
 }
+
+variable "env" {}
 
 variable "application_type" {
   type = "string"
@@ -40,7 +39,7 @@ variable "team_name" {
 }
 
 variable "team_contact" {
-  default = ""
+  default = "#cmc-tech"
 }
 
 variable "name" {
