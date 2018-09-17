@@ -1,6 +1,5 @@
 locals {
   tags = "${merge(var.common_tags,
-    map("lastUpdated", "${timestamp()}"),
     map("Team Name", "${var.team_name}"),
     map("Team Contact", "${var.team_contact}")
     )}"
