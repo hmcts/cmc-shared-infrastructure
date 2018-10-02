@@ -1,7 +1,7 @@
 locals {
   ase_name = "core-compute-${var.env}"
 
-  // num of apps * 1 to save cost where we can, * 2 in prod like environments
+  // need to resize this to be smaller, should be ~3 apps to a worker if the apps can handle that
   asp_capacity = "${var.env == "prod" || var.env == "sprod" || var.env == "aat" ? 6 : 3}"
 
   // I2 in prod like env, I1 everywhere else
