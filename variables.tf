@@ -56,3 +56,5 @@ variable "citizen_external_cert_vault_uri" {}
 variable "legal_external_hostname" {}
 variable "legal_external_cert_name" {}
 variable "legal_external_cert_vault_uri" {}
+
+variable "ilbIp" {}

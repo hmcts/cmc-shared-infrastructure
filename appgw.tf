@@ -89,6 +89,12 @@ module "appGwSouth" {
   backendAddressPools = [
     {
       name = "${var.product}-${var.env}"
+
+      backendAddresses = [
+        {
+          fqdn = "${var.ilbIp}"
+        },
+      ]
     },
   ]
 
