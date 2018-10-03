@@ -2,7 +2,7 @@ locals {
   ase_name = "core-compute-${var.env}"
 
   // need to resize this to be smaller, should be ~3 apps to a worker if the apps can handle that
-  asp_capacity = "${var.env == "prod" || var.env == "sprod" || var.env == "aat" ? 6 : 3}"
+  asp_capacity = "${var.env == "prod" || var.env == "sprod" || var.env == "aat" ? 3 : 1}"
 
   // I2 in prod like env, I1 everywhere else
   sku_size = "${var.env == "prod" || var.env == "sprod" || var.env == "aat" ? "I2" : "I1"}"
