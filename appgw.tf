@@ -21,9 +21,6 @@ module "appGwSouth" {
   location = "${var.location}"
   wafName = "${var.product}"
   resourcegroupname = "${azurerm_resource_group.rg.name}"
-  team_name = "${var.team_name}"
-  team_contact = "${var.team_contact}"
-  destroy_me = "false"
 
   # vNet connections
   gatewayIpConfigurations = [
@@ -170,6 +167,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-80"
       host = "${var.citizen_external_hostname}"
+      healthyStatusCodes = "200-399"
     },
     {
       name = "citizen-https-probe"
@@ -181,6 +179,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-443"
       host = "${var.citizen_external_hostname}"
+      healthyStatusCodes = "200-399"
     },
 
     # Legal
@@ -194,6 +193,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-80"
       host = "${var.legal_external_hostname}"
+      healthyStatusCodes = "200-399"
     },
     {
       name = "legal-https-probe"
@@ -205,6 +205,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-443"
       host = "${var.legal_external_hostname}"
+      healthyStatusCodes = "200-399"
     }
   ]
 }
