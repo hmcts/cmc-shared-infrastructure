@@ -34,10 +34,6 @@ variable "jenkins_AAD_objectId" {
 
 variable "subscription" {}
 
-variable "team_name" {
-  default = "cmc"
-}
-
 variable "team_contact" {
   default = "#cmc-tech"
 }
