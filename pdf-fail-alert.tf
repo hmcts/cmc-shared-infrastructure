@@ -14,7 +14,7 @@ AIQ
   frequency_in_minutes = 5
   time_window_in_minutes = 5
   severity_level = "3"
-  action_group_name = "${module.cmc-pdf-fail-action-group.pdf_action_group_name}"
+  action_group_name = "${module.cmc-pdf-fail-action-group.action_group_name}"
   custom_email_subject = "CMC PDF Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0

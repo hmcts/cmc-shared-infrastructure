@@ -9,7 +9,7 @@ module "cmc-bulk-print-fail-alert" {
   frequency_in_minutes = 5
   time_window_in_minutes = 5
   severity_level = "3"
-  action_group_name = "${module.cmc-bulk-print-fail-action-group.bpf_action_group_name}"
+  action_group_name = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
   custom_email_subject = "CMC Bulk Print Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
