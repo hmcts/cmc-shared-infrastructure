@@ -20,6 +20,6 @@ module "cmc-bulk-print-fail-action-group" {
   email_receiver_address = "${data.azurerm_key_vault_secret.bpf_email_secret.value}"
 }
 
-output "action_group_name" {
+output "bpf_action_group_name" {
   value = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
 }
