@@ -26,7 +26,7 @@ module "cmc-pdf-fail-alert" {
   app_insights_query = <<AIQ
 requests
 | join (exceptions | where customDimensions != "") on operation_Id
-| join (dependencies | where target == "cmc-pdf-service-prod.service.core-compute-prod.internal") on operation_Id
+| join (dependencies | where target == "cmc-pdf-service-${var.env}.service.core-compute-${var.env}.internal") on operation_Id
 | where name startswith "POST"
 AIQ
   frequency_in_minutes = 5
