@@ -22,15 +22,18 @@ module "cmc-pdf-fail-alert" {
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
   alert_name = "PDF failure - CMC"
-  alert_desc = "Triggers when a PDF failure event is received from CMC in a 5 minute poll."
+  alert_desc = "Triggers when a PDF failure event is received from CMC in a 30 minute poll."
   app_insights_query = <<AIQ
 requests
-| join (exceptions | where customDimensions != "") on operation_Id
-| join (dependencies | where target == "cmc-pdf-service-${var.env}.service.core-compute-${var.env}.internal") on operation_Id
 | where name startswith "POST"
+| join (exceptions
+| search "cmc-pdf-service"
+| where customDimensions != ""
+| project operation_Id, dimensions=customDimensions) on operation_Id
+| project timestamp, operation_Id, url, name, dimensions
 AIQ
-  frequency_in_minutes = 5
-  time_window_in_minutes = 5
+  frequency_in_minutes = 30
+  time_window_in_minutes = 30
   severity_level = "3"
   action_group_name = "${module.cmc-pdf-fail-action-group.action_group_name}"
   custom_email_subject = "CMC PDF Failure"
