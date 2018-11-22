@@ -6,5 +6,6 @@ module "shutterPage" {
   tag_list = "${local.tags}"
   product = "${var.product}"
   shutterCustomDomain = "${var.citizen_shutter_domain}"
+  shutterPageDirectory = "defaultShutterPageCitizen"
   subscription = "${var.subscription}"
 }
