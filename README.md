@@ -32,9 +32,14 @@ This module requires a secret to be present in the key vault in order to execute
    * The key vault and application insights resources will be created.
    * The bulk print fail action group and associated alert will fail.
    * The PDF fail action group and associated alert will fail.
+   * The ff4j admissions failure action group and associated alert will fail.
 2. Manually add the `bulk-print-failure-email` secret with a single email address; this is where alerts about bulk print failures will be sent.
 3. Manually add the `pdf-failure-email` secret with a single email address; this is where alerts about PDF failures will be sent.
-4. Execute the project again.
+4. Manually add the `ff4j-admissions-failure-email` secret with a single email address; this is where alerts about ff4j admissions failure will be sent.
+5. Execute the project again.
    * The key vault and application insights resources already exist and will be skipped.
    * The bulk print fail action group and associated alert will be successfully defined.
    * The PDF fail action group and associated alert will be successfully defined.
+   * The ff4j admissions failure action group and associated alert will be successfully defined.
+
+

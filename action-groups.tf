@@ -43,3 +43,26 @@ module "cmc-pdf-fail-action-group" {
 output "pdf_action_group_name" {
   value = "${module.cmc-pdf-fail-action-group.action_group_name}"
 }
+
+// CMC Admission Failures
+
+data "azurerm_key_vault_secret" "ff4j_email_secret" {
+  name = "ff4j-admissions-failure-email"
+  vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
+}
+
+module "cmc-ff4j-admissions-fail-action-group" {
+  source = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env = "${var.env}"
+
+  resourcegroup_name = "${azurerm_resource_group.rg.name}"
+  action_group_name = "ff4j Admissions Failure Alert - ${var.env}"
+  short_name = "ff4j_alert"
+  email_receiver_name = "ff4j Admissions Failure Alerts"
+  email_receiver_address = "${data.azurerm_key_vault_secret.ff4j_email_secret.value}"
+}
+
+output "ff4j_failure_action_group" {
+  value = "${data.azurerm_key_vault_secret.ff4j_email_secret.value}"
+}
