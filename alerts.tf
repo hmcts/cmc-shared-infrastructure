@@ -59,3 +59,21 @@ module "cmc-ff4j-admissions-fail-alert" {
   trigger_threshold = 0
   resourcegroup_name = "${azurerm_resource_group.rg.name}"
 }
+
+module "cmc-document-management-fail-alert" {
+  source = "git@github.com:hmcts/cnp-module-metric-alert"
+  location = "${azurerm_application_insights.appinsights.location}"
+  app_insights_name = "${azurerm_application_insights.appinsights.name}"
+
+  alert_name = "Document Management failure - CMC"
+  alert_desc = "Triggers when a Document Management upload or download failure event is recieved from CMC in a 5 minute poll."
+  app_insights_query = "customEvents | where name == \"Document management upload - failure\" or name == \"Document management download - failure\""
+  frequency_in_minutes = 5
+  time_window_in_minutes = 5
+  severity_level = "3"
+  action_group_name = "${module.cmc-document-management-failure-action-group.action_group_name}"
+  custom_email_subject = "CMC Document Management Failure"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold = 0
+  resourcegroup_name = "${azurerm_resource_group.rg.name}"
+}
