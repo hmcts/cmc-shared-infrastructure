@@ -66,3 +66,26 @@ module "cmc-ff4j-admissions-fail-action-group" {
 output "ff4j_failure_action_group" {
   value = "${data.azurerm_key_vault_secret.ff4j_email_secret.value}"
 }
+
+// CMC Document Management Failure
+
+data "azurerm_key_vault_secret" "document_management_email_secret" {
+  name = "document-management-failure-email"
+  vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
+}
+
+module "cmc-document-management-failure-action-group" {
+  source = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env = "${var.env}"
+
+  resourcegroup_name = "${azurerm_resource_group.rg.name}"
+  action_group_name = "Document Management Failure Alert - ${var.env}"
+  short_name = "DMF_alert"
+  email_receiver_name = "Document Management Failure Alerts"
+  email_receiver_address = "${data.azurerm_key_vault_secret.document_management_email_secret.value}"
+}
+
+output "document_management_failure_action_group_name" {
+  value = "${module.cmc-document-management-failure-action-group.action_group_name}"
+}
