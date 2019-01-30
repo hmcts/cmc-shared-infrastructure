@@ -66,7 +66,7 @@ module "cmc-document-management-fail-alert" {
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
   alert_name = "Document Management failure - CMC"
-  alert_desc = "Triggers when a Document Management upload or download failure event is recieved from CMC in a 5 minute poll."
+  alert_desc = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
   app_insights_query = "customEvents | where name == \"Document management upload - failure\" or name == \"Document management download - failure\""
   frequency_in_minutes = 5
   time_window_in_minutes = 5

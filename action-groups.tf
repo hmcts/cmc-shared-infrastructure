@@ -87,5 +87,5 @@ module "cmc-document-management-failure-action-group" {
 }
 
 output "document_management_failure_action_group_name" {
-  value = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
+  value = "${module.cmc-document-management-failure-action-group.action_group_name}"
 }
