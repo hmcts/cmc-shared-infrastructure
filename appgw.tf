@@ -15,7 +15,7 @@ locals {
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
-  source = "git@github.com:hmcts/cnp-module-waf?ref=stripDownWf"
+  source = "git@github.com:hmcts/cnp-module-waf?ref=master"
   env = "${var.env}"
   subscription = "${var.subscription}"
   location = "${var.location}"
@@ -116,7 +116,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "citizen-https-probe"
       PickHostNameFromBackendAddress = "False"
-      Host = "${var.citizen_external_hostname}"
+      HostName = "${var.citizen_external_hostname}"
 
     }
   ]
