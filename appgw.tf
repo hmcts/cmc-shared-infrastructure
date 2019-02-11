@@ -116,7 +116,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "citizen-https-probe"
       PickHostNameFromBackendAddress = "False"
-      Host = "${var.citizen_external_hostname}"
+      HostName = "${var.citizen_external_hostname}"
 
     }
   ]
