@@ -1,86 +1,85 @@
 data "azurerm_key_vault_secret" "citizen-cert" {
-  name = "${var.citizen_external_cert_name}"
+  name      = "${var.citizen_external_cert_name}"
   vault_uri = "${var.citizen_external_cert_vault_uri}"
 }
 
 data "azurerm_key_vault_secret" "legal-cert" {
-  name = "${var.legal_external_cert_name}"
+  name      = "${var.legal_external_cert_name}"
   vault_uri = "${var.legal_external_cert_vault_uri}"
 }
 
 locals {
   citizen_cert_suffix = "${var.env != "prod" ? "-citizen" : ""}"
-  legal_cert_suffix = "${var.env != "prod" ? "-legal" : ""}"
+  legal_cert_suffix   = "${var.env != "prod" ? "-legal" : ""}"
 }
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
-  source = "git@github.com:hmcts/cnp-module-waf?ref=master"
-  env = "${var.env}"
-  subscription = "${var.subscription}"
-  location = "${var.location}"
-  wafName = "${var.product}"
+  source            = "git@github.com:hmcts/cnp-module-waf?ref=master"
+  env               = "${var.env}"
+  subscription      = "${var.subscription}"
+  location          = "${var.location}"
+  wafName           = "${var.product}"
   resourcegroupname = "${azurerm_resource_group.rg.name}"
-  common_tags = "${var.common_tags}"
-  
+  common_tags       = "${var.common_tags}"
+
   # vNet connections
   gatewayIpConfigurations = [
     {
-      name = "internalNetwork"
+      name     = "internalNetwork"
       subnetId = "${data.azurerm_subnet.subnet_a.id}"
     },
   ]
 
   sslCertificates = [
     {
-      name = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
-      data = "${data.azurerm_key_vault_secret.citizen-cert.value}"
+      name     = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
+      data     = "${data.azurerm_key_vault_secret.citizen-cert.value}"
       password = ""
     },
     {
-      name = "${var.legal_external_cert_name}${local.legal_cert_suffix}"
-      data = "${data.azurerm_key_vault_secret.legal-cert.value}"
+      name     = "${var.legal_external_cert_name}${local.legal_cert_suffix}"
+      data     = "${data.azurerm_key_vault_secret.legal-cert.value}"
       password = ""
-    }
+    },
   ]
 
   # Http Listeners
   httpListeners = [
-    # Citizen
     {
-      name = "citizen-http-listener"
+      # Citizen
+      name                    = "citizen-http-listener"
       FrontendIPConfiguration = "appGatewayFrontendIP"
-      FrontendPort = "frontendPort80"
-      Protocol = "Http"
-      SslCertificate = ""
-      hostName = "${var.citizen_external_hostname}"
+      FrontendPort            = "frontendPort80"
+      Protocol                = "Http"
+      SslCertificate          = ""
+      hostName                = "${var.citizen_external_hostname}"
     },
     {
-      name = "citizen-https-listener"
+      name                    = "citizen-https-listener"
       FrontendIPConfiguration = "appGatewayFrontendIP"
-      FrontendPort = "frontendPort443"
-      Protocol = "Https"
-      SslCertificate = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
-      hostName = "${var.citizen_external_hostname}"
-    },
-
-    # Legal
-    {
-      name = "legal-http-listener"
-      FrontendIPConfiguration = "appGatewayFrontendIP"
-      FrontendPort = "frontendPort80"
-      Protocol = "Http"
-      SslCertificate = ""
-      hostName = "${var.legal_external_hostname}"
+      FrontendPort            = "frontendPort443"
+      Protocol                = "Https"
+      SslCertificate          = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
+      hostName                = "${var.citizen_external_hostname}"
     },
     {
-      name = "legal-https-listener"
+      # Legal
+      name                    = "legal-http-listener"
       FrontendIPConfiguration = "appGatewayFrontendIP"
-      FrontendPort = "frontendPort443"
-      Protocol = "Https"
-      SslCertificate = "${var.legal_external_cert_name}${local.legal_cert_suffix}"
-      hostName = "${var.legal_external_hostname}"
-    }
+      FrontendPort            = "frontendPort80"
+      Protocol                = "Http"
+      SslCertificate          = ""
+      hostName                = "${var.legal_external_hostname}"
+    },
+    {
+      name                    = "legal-https-listener"
+      FrontendIPConfiguration = "appGatewayFrontendIP"
+      FrontendPort            = "frontendPort443"
+      Protocol                = "Https"
+      SslCertificate          = "${var.legal_external_cert_name}${local.legal_cert_suffix}"
+      hostName                = "${var.legal_external_hostname}"
+    },
   ]
 
   # Backend address Pools
@@ -98,114 +97,89 @@ module "appGwSouth" {
 
   backendHttpSettingsCollection = [
     {
-      name = "backend-80"
-      port = 80
-      Protocol = "Http"
-      CookieBasedAffinity = "Disabled"
-      AuthenticationCertificates = ""
-      probeEnabled = "True"
-      probe = "citizen-http-probe"
+      name                           = "citizen-backend-80"
+      port                           = 80
+      Protocol                       = "Http"
+      CookieBasedAffinity            = "Disabled"
+      AuthenticationCertificates     = ""
+      probeEnabled                   = "True"
+      probe                          = "citizen-http-probe"
       PickHostNameFromBackendAddress = "False"
-      HostName = ""
+      HostName                       = ""
     },
     {
-      name = "backend-443"
-      port = 443
-      Protocol = "Https"
-      CookieBasedAffinity = "Disabled"
-      AuthenticationCertificates = "ilbCert"
-      probeEnabled = "True"
-      probe = "citizen-https-probe"
+      name                           = "legal-backend-80"
+      port                           = 80
+      Protocol                       = "Http"
+      CookieBasedAffinity            = "Disabled"
+      AuthenticationCertificates     = ""
+      probeEnabled                   = "True"
+      probe                          = "legal-http-probe"
       PickHostNameFromBackendAddress = "False"
-      HostName = ""
-    }
+      HostName                       = ""
+    },
   ]
+
   # Request routing rules
   requestRoutingRules = [
-    # Citizen
     {
-      name = "citizen-http"
-      RuleType = "Basic"
-      httpListener = "citizen-http-listener"
-      backendAddressPool = "${var.product}-${var.env}"
-      backendHttpSettings = "backend-80"
+      # Citizen
+      name                = "citizen-http"
+      RuleType            = "Basic"
+      httpListener        = "citizen-http-listener"
+      backendAddressPool  = "${var.product}-${var.env}"
+      backendHttpSettings = "citizen-backend-80"
     },
     {
-      name = "citizen-https"
-      RuleType = "Basic"
-      httpListener = "citizen-https-listener"
-      backendAddressPool = "${var.product}-${var.env}"
-      backendHttpSettings = "backend-443"
-    },
-
-    # Legal
-    {
-      name = "legal-http"
-      RuleType = "Basic"
-      httpListener = "legal-http-listener"
-      backendAddressPool = "${var.product}-${var.env}"
-      backendHttpSettings = "backend-80"
+      name                = "citizen-https"
+      RuleType            = "Basic"
+      httpListener        = "citizen-https-listener"
+      backendAddressPool  = "${var.product}-${var.env}"
+      backendHttpSettings = "citizen-backend-80"
     },
     {
-      name = "legal-https"
-      RuleType = "Basic"
-      httpListener = "legal-https-listener"
-      backendAddressPool = "${var.product}-${var.env}"
-      backendHttpSettings = "backend-443"
-    }
+      # Legal
+      name                = "legal-http"
+      RuleType            = "Basic"
+      httpListener        = "legal-http-listener"
+      backendAddressPool  = "${var.product}-${var.env}"
+      backendHttpSettings = "legal-backend-80"
+    },
+    {
+      name                = "legal-https"
+      RuleType            = "Basic"
+      httpListener        = "legal-https-listener"
+      backendAddressPool  = "${var.product}-${var.env}"
+      backendHttpSettings = "legal-backend-80"
+    },
   ]
 
   probes = [
-    # Citizen
     {
-      name = "citizen-http-probe"
-      protocol = "Http"
-      path = "/"
-      interval = 30
-      timeout = 30
-      unhealthyThreshold = 5
+      # Citizen
+      name                                = "citizen-http-probe"
+      protocol                            = "Http"
+      path                                = "/"
+      interval                            = 30
+      timeout                             = 30
+      unhealthyThreshold                  = 5
       pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings = "backend-80"
-      host = "${var.citizen_external_hostname}"
-      healthyStatusCodes = "200-399"
+      backendHttpSettings                 = "citizen-backend-80"
+      host                                = "${var.citizen_external_hostname}"
+      healthyStatusCodes                  = "200-399"
     },
     {
-      name = "citizen-https-probe"
-      protocol = "Https"
-      path = "/"
-      interval = 30
-      timeout = 30
-      unhealthyThreshold = 5
+      # Legal
+      name                                = "legal-http-probe"
+      protocol                            = "Http"
+      path                                = "/"
+      interval                            = 30
+      timeout                             = 30
+      unhealthyThreshold                  = 5
       pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings = "backend-443"
-      host = "${var.citizen_external_hostname}"
-      healthyStatusCodes = "200-399"
+      backendHttpSettings                 = "legal-backend-80"
+      host                                = "${var.legal_external_hostname}"
+      healthyStatusCodes                  = "200-399"
     },
-
-    # Legal
-    {
-      name = "legal-http-probe"
-      protocol = "Http"
-      path = "/"
-      interval = 30
-      timeout = 30
-      unhealthyThreshold = 5
-      pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings = "backend-80"
-      host = "${var.legal_external_hostname}"
-      healthyStatusCodes = "200-399"
-    },
-    {
-      name = "legal-https-probe"
-      protocol = "Https"
-      path = "/"
-      interval = 30
-      timeout = 30
-      unhealthyThreshold = 5
-      pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings = "backend-443"
-      host = "${var.legal_external_hostname}"
-      healthyStatusCodes = "200-399"
-    }
   ]
 }
