@@ -105,7 +105,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "citizen-http-probe"
       PickHostNameFromBackendAddress = "False"
-      HostName = "${var.citizen_external_hostname}"
+      HostName = ""
     },
     {
       name = "backend-443"
@@ -116,8 +116,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "citizen-https-probe"
       PickHostNameFromBackendAddress = "False"
-      HostName = "${var.citizen_external_hostname}"
-
+      HostName = ""
     }
   ]
   # Request routing rules
