@@ -116,7 +116,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "citizen-https-probe"
       PickHostNameFromBackendAddress = "False"
-      HostName = "$"
+      HostName = ""
     }
   ]
   # Request routing rules
