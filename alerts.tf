@@ -78,4 +78,5 @@ module "cmc-document-management-fail-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = "${azurerm_resource_group.rg.name}"
+  action_group_rg            = "cmc-${var.env}"
 }
