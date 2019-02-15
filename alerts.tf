@@ -5,7 +5,7 @@ module "cmc-doc-mgt-fail-alert" {
 
   alert_name                 = "Document Management failure - CMC"
   alert_desc                 = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
-  app_insights_query         = "customEvents | where name == \"ff4J cmc_admissions failure\""
+  app_insights_query         = "customEvents | where name == \"Document management upload - failure\" or name == \"Document management download - failure\""
   frequency_in_minutes       = 5
   time_window_in_minutes     = 5
   severity_level             = "3"
