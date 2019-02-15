@@ -1,11 +1,31 @@
+module "cmc-doc-mgt-fail-alert" {
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
+  location          = "${azurerm_application_insights.appinsights.location}"
+  app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
+  alert_name                 = "cmc-doc-mgt-fail-alert"
+  alert_desc                 = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
+  app_insights_query         = <<AIQ
+customEvents
+| where name == "Document management upload - failure" or name == "Document management download - failure"
+AIQ
+
+  frequency_in_minutes       = 5
+  time_window_in_minutes     = 5
+  severity_level             = "3"
+  action_group_name          = "${module.cmc-doc-mgt-failure-action-group.action_group_name}"
+  custom_email_subject       = "CMC Document Management Failure"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = 0
+  resourcegroup_name         = "${azurerm_resource_group.rg.name}"
+}
 
 module "cmc-bulk-print-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name                 = "Bulk print failure - CMC"
+  alert_name                 = "cmc-bulk-print-fail-alert"
   alert_desc                 = "Triggers when a bulk print failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"Bulk print failed\""
   frequency_in_minutes       = 5
@@ -23,7 +43,7 @@ module "cmc-pdf-fail-alert" {
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name = "PDF failure - CMC"
+  alert_name = "cmc-pdf-fail-alert"
   alert_desc = "Triggers when a PDF failure event is received from CMC in a 30 minute poll."
 
   app_insights_query = <<AIQ
@@ -51,7 +71,7 @@ module "cmc-ff4j-admissions-fail-alert" {
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name                 = "ff4j cmc_admissions failure - CMC"
+  alert_name                 = "cmc-ff4j-admissions-fail-alert"
   alert_desc                 = "Triggers when a ff4J cmc_admissions failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"ff4J cmc_admissions failure\""
   frequency_in_minutes       = 5
