@@ -6,9 +6,10 @@ module "cmc-doc-mgt-fail-alert" {
   alert_name                 = "Document Management failure - CMC"
   alert_desc                 = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
   app_insights_query         = <<AIQ
-customEvents | 
+customEvents
 | where name == "Document management upload - failure" or name == "Document management download - failure"
 AIQ
+
   frequency_in_minutes       = 5
   time_window_in_minutes     = 5
   severity_level             = "3"
