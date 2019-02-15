@@ -21,23 +21,6 @@ output "bpf_action_group_name" {
   value = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
 }
 
-// Test print failures
-module "cmc-test-fail-action-group" {
-  source   = "git@github.com:hmcts/cnp-module-action-group"
-  location = "global"
-  env      = "${var.env}"
-
-  resourcegroup_name     = "${azurerm_resource_group.rg.name}"
-  action_group_name      = "Test Fail Alert - ${var.env}"
-  short_name             = "Test_alert"
-  email_receiver_name    = "Test Print Alerts"
-  email_receiver_address = "${data.azurerm_key_vault_secret.bpf_email_secret.value}"
-}
-
-output "test_action_group_name" {
-  value = "${module.cmc-test-fail-action-group.action_group_name}"
-}
-
 // PDF service failures
 
 data "azurerm_key_vault_secret" "pdf_fail_email_secret" {
@@ -80,26 +63,28 @@ module "cmc-ff4j-admissions-fail-action-group" {
   email_receiver_address = "${data.azurerm_key_vault_secret.ff4j_email_secret.value}"
 }
 
-output "ff4j_failure_action_group" {
-  value = "${data.azurerm_key_vault_secret.ff4j_email_secret.value}"
+output "ff4j_failure_action_group_name" {
+  value = "${module.cmc-ff4j-admissions-fail-action-group.action_group_name}"
 }
 
 // CMC Document Management Failure
 
-data "azurerm_key_vault_secret" "document_management_email_secret" {
+data "azurerm_key_vault_secret" "doc_mgt_email_secret" {
   name      = "document-management-failure-email"
   vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
 }
 
-module "cmc-document-management-failure-action-group" {
+module "cmc-doc-mgt-failure-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = "${var.env}"
 
   resourcegroup_name     = "${azurerm_resource_group.rg.name}"
   action_group_name      = "Document Management Failure Alert - ${var.env}"
-  short_name             = "DMF_alert"
+  short_name             = "DM_alert"
   email_receiver_name    = "Document Management Failure Alerts"
-  email_receiver_address = "${data.azurerm_key_vault_secret.document_management_email_secret.value}"
+  email_receiver_address = "${data.azurerm_key_vault_secret.doc_mgt_email_secret.value}"
 }
-
+output "doc_mgmt_failure_action_group_name" {
+  value = "${module.cmc-doc-mgt-failure-action-group.action_group_name}"
+}
