@@ -16,6 +16,24 @@ module "cmc-bulk-print-fail-alert" {
   resourcegroup_name         = "${azurerm_resource_group.rg.name}"
 }
 
+module "cmc-test-fail-alert" {
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
+  location          = "${azurerm_application_insights.appinsights.location}"
+  app_insights_name = "${azurerm_application_insights.appinsights.name}"
+
+  alert_name                 = "Test failure - CMC"
+  alert_desc                 = "Test"
+  app_insights_query         = "customEvents | where name == \"test failed\""
+  frequency_in_minutes       = 5
+  time_window_in_minutes     = 5
+  severity_level             = "3"
+  action_group_name          = "${module.cmc-test-fail-action-group.action_group_name}"
+  custom_email_subject       = "CMC Test Failure"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = 0
+  resourcegroup_name         = "${azurerm_resource_group.rg.name}"
+}
+
 module "cmc-pdf-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"

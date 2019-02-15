@@ -21,6 +21,23 @@ output "bpf_action_group_name" {
   value = "${module.cmc-bulk-print-fail-action-group.action_group_name}"
 }
 
+// Test print failures
+module "cmc-test-fail-action-group" {
+  source   = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env      = "${var.env}"
+
+  resourcegroup_name     = "${azurerm_resource_group.rg.name}"
+  action_group_name      = "Test Fail Alert - ${var.env}"
+  short_name             = "Test_alert"
+  email_receiver_name    = "Test Print Alerts"
+  email_receiver_address = "${data.azurerm_key_vault_secret.bpf_email_secret.value}"
+}
+
+output "test_action_group_name" {
+  value = "${module.cmc-test-fail-action-group.action_group_name}"
+}
+
 // PDF service failures
 
 data "azurerm_key_vault_secret" "pdf_fail_email_secret" {
