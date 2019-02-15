@@ -5,7 +5,7 @@ module "cmc-bulk-print-fail-alert" {
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name                 = "Bulk print failure - CMC"
+  alert_name                 = "cmc-bulk-print"
   alert_desc                 = "Triggers when a bulk print failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"Bulk print failed\""
   frequency_in_minutes       = 5
@@ -23,7 +23,7 @@ module "cmc-pdf-fail-alert" {
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name = "PDF failure - CMC"
+  alert_name = "cmc-pdf"
   alert_desc = "Triggers when a PDF failure event is received from CMC in a 30 minute poll."
 
   app_insights_query = <<AIQ
@@ -51,7 +51,7 @@ module "cmc-ff4j-admissions-fail-alert" {
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name                 = "ff4j cmc_admissions failure - CMC"
+  alert_name                 = "cmc-ff4j"
   alert_desc                 = "Triggers when a ff4J cmc_admissions failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"ff4J cmc_admissions failure\""
   frequency_in_minutes       = 5
