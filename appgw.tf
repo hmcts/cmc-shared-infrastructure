@@ -117,7 +117,6 @@ module "appGwSouth" {
       probeEnabled                   = "True"
       probe                          = "citizen-https-probe"
       PickHostNameFromBackendAddress = "True"
-      HostName                       = ""
     },
     {
       name                           = "legal-backend-80"
@@ -139,7 +138,6 @@ module "appGwSouth" {
       probeEnabled                   = "True"
       probe                          = "legal-https-probe"
       PickHostNameFromBackendAddress = "True"
-      HostName                       = ""
     },
   ]
 
@@ -201,7 +199,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "citizen-backend-443"
       host                                = "${local.paybubble_backend_hostname}"
-      healthyStatusCodes                  = "200-404"                             // MS returns 404 on /, allowing more codes in case they change it
+      healthyStatusCodes                  = "200"
     },
     {
       # Legal
@@ -226,7 +224,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "legal-backend-443"
       host                                = "${local.paybubble_backend_hostname}"
-      healthyStatusCodes                  = "200-404"                             // MS returns 404 on /, allowing more codes in case they change it
+      healthyStatusCodes                  = "200"
     },
   ]
 }
