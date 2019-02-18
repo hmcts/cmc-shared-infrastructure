@@ -1,5 +1,5 @@
 module "cmc-doc-mgt-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
@@ -22,7 +22,7 @@ AIQ
 }
 
 module "cmc-bulk-print-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
@@ -40,7 +40,7 @@ module "cmc-bulk-print-fail-alert" {
 }
 
 module "cmc-pdf-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
