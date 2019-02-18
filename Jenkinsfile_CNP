@@ -11,3 +11,7 @@ onMaster {
   sharedInfrastructurePipeline('cmc', environment.demoName, 'nonprod')
   sharedInfrastructurePipeline('cmc', environment.prodName, 'prod')
 }
+
+onPR {
+  sharedInfrastructurePipeline('cmc', environment.nonProdName, 'nonprod', true)
+}
