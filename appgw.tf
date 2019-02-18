@@ -117,6 +117,7 @@ module "appGwSouth" {
       probeEnabled                   = "True"
       probe                          = "citizen-https-probe"
       PickHostNameFromBackendAddress = "True"
+      HostName                       = ""
     },
     {
       name                           = "legal-backend-80"
@@ -138,6 +139,7 @@ module "appGwSouth" {
       probeEnabled                   = "True"
       probe                          = "legal-https-probe"
       PickHostNameFromBackendAddress = "True"
+      HostName                       = ""
     },
   ]
 
