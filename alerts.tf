@@ -1,11 +1,12 @@
 module "cmc-doc-mgt-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name                 = "cmc-doc-mgt-fail-alert"
-  alert_desc                 = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
-  app_insights_query         = <<AIQ
+  alert_name = "cmc-doc-mgt-fail-alert"
+  alert_desc = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
+
+  app_insights_query = <<AIQ
 customEvents
 | where name == "Document management upload - failure" or name == "Document management download - failure"
 AIQ
@@ -21,7 +22,7 @@ AIQ
 }
 
 module "cmc-bulk-print-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
@@ -39,7 +40,7 @@ module "cmc-bulk-print-fail-alert" {
 }
 
 module "cmc-pdf-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
@@ -67,7 +68,7 @@ AIQ
 }
 
 module "cmc-ff4j-admissions-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 

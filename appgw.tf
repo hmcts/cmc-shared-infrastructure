@@ -15,13 +15,14 @@ locals {
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
-  source            = "git@github.com:hmcts/cnp-module-waf?ref=master"
-  env               = "${var.env}"
-  subscription      = "${var.subscription}"
-  location          = "${var.location}"
-  wafName           = "${var.product}"
-  resourcegroupname = "${azurerm_resource_group.rg.name}"
-  common_tags       = "${var.common_tags}"
+  source                  = "git@github.com:hmcts/cnp-module-waf?ref=master"
+  env                     = "${var.env}"
+  subscription            = "${var.subscription}"
+  location                = "${var.location}"
+  wafName                 = "${var.product}"
+  resourcegroupname       = "${azurerm_resource_group.rg.name}"
+  common_tags             = "${var.common_tags}"
+  use_authentication_cert = true
 
   # vNet connections
   gatewayIpConfigurations = [
@@ -108,6 +109,16 @@ module "appGwSouth" {
       HostName                       = ""
     },
     {
+      name                           = "citizen-backend-443"
+      port                           = 443
+      Protocol                       = "Https"
+      CookieBasedAffinity            = "Disabled"
+      AuthenticationCertificates     = "ilbCert"
+      probeEnabled                   = "True"
+      probe                          = "citizen-https-probe"
+      PickHostNameFromBackendAddress = "True"
+    },
+    {
       name                           = "legal-backend-80"
       port                           = 80
       Protocol                       = "Http"
@@ -117,6 +128,16 @@ module "appGwSouth" {
       probe                          = "legal-http-probe"
       PickHostNameFromBackendAddress = "False"
       HostName                       = ""
+    },
+    {
+      name                           = "legal-backend-443"
+      port                           = 443
+      Protocol                       = "Https"
+      CookieBasedAffinity            = "Disabled"
+      AuthenticationCertificates     = "ilbCert"
+      probeEnabled                   = "True"
+      probe                          = "legal-https-probe"
+      PickHostNameFromBackendAddress = "True"
     },
   ]
 
@@ -135,7 +156,7 @@ module "appGwSouth" {
       RuleType            = "Basic"
       httpListener        = "citizen-https-listener"
       backendAddressPool  = "${var.product}-${var.env}"
-      backendHttpSettings = "citizen-backend-80"
+      backendHttpSettings = "citizen-backend-443"
     },
     {
       # Legal
@@ -150,7 +171,7 @@ module "appGwSouth" {
       RuleType            = "Basic"
       httpListener        = "legal-https-listener"
       backendAddressPool  = "${var.product}-${var.env}"
-      backendHttpSettings = "legal-backend-80"
+      backendHttpSettings = "legal-backend-443"
     },
   ]
 
@@ -169,6 +190,18 @@ module "appGwSouth" {
       healthyStatusCodes                  = "200-399"
     },
     {
+      name                                = "citizen-https-probe"
+      protocol                            = "Https"
+      path                                = "/"
+      interval                            = 30
+      timeout                             = 30
+      unhealthyThreshold                  = 5
+      pickHostNameFromBackendHttpSettings = "false"
+      backendHttpSettings                 = "citizen-backend-443"
+      host                                = "${var.citizen_external_hostname}"
+      healthyStatusCodes                  = "200"
+    },
+    {
       # Legal
       name                                = "legal-http-probe"
       protocol                            = "Http"
@@ -180,6 +213,18 @@ module "appGwSouth" {
       backendHttpSettings                 = "legal-backend-80"
       host                                = "${var.legal_external_hostname}"
       healthyStatusCodes                  = "200-399"
+    },
+    {
+      name                                = "legal-https-probe"
+      protocol                            = "Https"
+      path                                = "/"
+      interval                            = 30
+      timeout                             = 30
+      unhealthyThreshold                  = 5
+      pickHostNameFromBackendHttpSettings = "false"
+      backendHttpSettings                 = "legal-backend-443"
+      host                                = "${var.legal_external_hostname}"
+      healthyStatusCodes                  = "200"
     },
   ]
 }

@@ -85,6 +85,7 @@ module "cmc-doc-mgt-failure-action-group" {
   email_receiver_name    = "Document Management Failure Alerts"
   email_receiver_address = "${data.azurerm_key_vault_secret.doc_mgt_email_secret.value}"
 }
+
 output "doc_mgmt_failure_action_group_name" {
   value = "${module.cmc-doc-mgt-failure-action-group.action_group_name}"
 }
