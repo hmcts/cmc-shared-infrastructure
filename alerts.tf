@@ -68,7 +68,7 @@ AIQ
 }
 
 module "cmc-ff4j-admissions-fail-alert" {
-  source            = "git@github.com:hmcts/cnp-module-metric-alert?ref=custom-alert-name"
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
