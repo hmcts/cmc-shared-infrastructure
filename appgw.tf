@@ -192,7 +192,7 @@ module "appGwSouth" {
     {
       name                                = "citizen-https-probe"
       protocol                            = "Https"
-      path                                = "${var.health_check}"
+      path                                = "/"
       interval                            = 30
       timeout                             = 30
       unhealthyThreshold                  = 5
@@ -217,13 +217,13 @@ module "appGwSouth" {
     {
       name                                = "legal-https-probe"
       protocol                            = "Https"
-      path                                = "${var.health_check}"
+      path                                = "/"
       interval                            = 30
       timeout                             = 30
       unhealthyThreshold                  = 5
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "legal-backend-443"
-      host                                = "${var.legal_external_hostnamee}"
+      host                                = "${var.legal_external_hostname}"
       healthyStatusCodes                  = "200"
     },
   ]
