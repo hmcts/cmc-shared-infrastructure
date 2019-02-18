@@ -198,7 +198,7 @@ module "appGwSouth" {
       unhealthyThreshold                  = 5
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "citizen-backend-443"
-      host                                = "${local.paybubble_backend_hostname}"
+      host                                = "${var.citizen_external_hostname}"
       healthyStatusCodes                  = "200"
     },
     {
@@ -223,7 +223,7 @@ module "appGwSouth" {
       unhealthyThreshold                  = 5
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "legal-backend-443"
-      host                                = "${local.paybubble_backend_hostname}"
+      host                                = "${var.legal_external_hostnamee}"
       healthyStatusCodes                  = "200"
     },
   ]
