@@ -192,18 +192,6 @@ module "appGwSouth" {
       healthyStatusCodes                  = "200-399"
     },
     {
-      name                                = "citizen-https-probe"
-      protocol                            = "Https"
-      path                                = "/"
-      interval                            = 30
-      timeout                             = 30
-      unhealthyThreshold                  = 5
-      pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings                 = "citizen-backend-443"
-      host                                = "${var.citizen_external_hostname}"
-      healthyStatusCodes                  = "200-399"
-    },
-    {
       # Legal
       name                                = "legal-http-probe"
       protocol                            = "Http"
@@ -213,18 +201,6 @@ module "appGwSouth" {
       unhealthyThreshold                  = 5
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "legal-backend-80"
-      host                                = "${var.legal_external_hostname}"
-      healthyStatusCodes                  = "200-399"
-    },
-    {
-      name                                = "legal-https-probe"
-      protocol                            = "Https"
-      path                                = "/"
-      interval                            = 30
-      timeout                             = 30
-      unhealthyThreshold                  = 5
-      pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings                 = "legal-backend-443"
       host                                = "${var.legal_external_hostname}"
       healthyStatusCodes                  = "200-399"
     },
