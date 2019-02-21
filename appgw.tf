@@ -201,7 +201,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "citizen-backend-443"
       host                                = "${var.citizen_external_hostname}"
-      healthyStatusCodes                  = "200"
+      healthyStatusCodes                  = "200-399"
     },
     {
       # Legal
@@ -226,7 +226,7 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "legal-backend-443"
       host                                = "${var.legal_external_hostname}"
-      healthyStatusCodes                  = "200"
+      healthyStatusCodes                  = "200-399"
     },
   ]
 }
