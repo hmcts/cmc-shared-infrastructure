@@ -116,7 +116,7 @@ module "appGwSouth" {
       AuthenticationCertificates     = "ilbCert"
       probeEnabled                   = "True"
       probe                          = "citizen-https-probe"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       HostName                       = ""
     },
     {
@@ -138,7 +138,7 @@ module "appGwSouth" {
       AuthenticationCertificates     = "ilbCert"
       probeEnabled                   = "True"
       probe                          = "legal-https-probe"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       HostName                       = ""
     },
   ]
