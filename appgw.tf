@@ -15,7 +15,7 @@ locals {
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
-  source                  = "git@github.com:hmcts/cnp-module-waf?ref=master"
+  source                  = "git@github.com:hmcts/cnp-module-waf?ref=RDM-3667-waf-logging"
   env                     = "${var.env}"
   subscription            = "${var.subscription}"
   location                = "${var.location}"
