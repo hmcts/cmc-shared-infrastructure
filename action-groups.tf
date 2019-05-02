@@ -92,23 +92,23 @@ output "doc_mgmt_failure_action_group_name" {
 
 // Notification Failure
 
-data "azurerm_key_vault_secret" "notification_email_secret" {
-  name      = "staff-notification-failure-email"
+data "azurerm_key_vault_secret" "claim_issue_email_secret" {
+  name      = "claim-issue-failure-email"
   vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
 }
 
-module "cmc-notification-failure-action-group" {
+module "claim-issue-failure-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = "${var.env}"
 
   resourcegroup_name     = "${azurerm_resource_group.rg.name}"
-  action_group_name      = "Notification Failure Alert - ${var.env}"
-  short_name             = "notification_failure_alert"
-  email_receiver_name    = "Notification Failure Alerts"
-  email_receiver_address = "${data.azurerm_key_vault_secret.notification_email_secret.value}"
+  action_group_name      = "Claim Issue Failure Alert - ${var.env}"
+  short_name             = "claim_issue_failure_alert"
+  email_receiver_name    = "Claim Issue Failure Alerts"
+  email_receiver_address = "${data.azurerm_key_vault_secret.claim_issue_email_secret.value}"
 }
 
-output "staff_notification_failure_action_group_name" {
-  value = "${module.cmc-notification-failure-action-group.action_group_name}"
+output "claim_issue_failure_action_group_name" {
+  value = "${module.claim-issue-failure-action-group.action_group_name}"
 }

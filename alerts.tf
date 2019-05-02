@@ -86,19 +86,19 @@ module "cmc-ff4j-admissions-fail-alert" {
 }
 
 
-module "cmc-notification-fail-alert" {
+module "claim-issue-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  alert_name                 = "cmc-notification-fail-alert"
-  alert_desc                 = "Triggers when a Notification failure event is received from CMC in a 5 minute poll."
+  alert_name                 = "claim-issue-fail-alert"
+  alert_desc                 = "Triggers when a Claim issue failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"Notification - failure\""
   frequency_in_minutes       = 5
   time_window_in_minutes     = 5
   severity_level             = "3"
-  action_group_name          = "${module.cmc-notification-failure-action-group.action_group_name}"
-  custom_email_subject       = "CMC Notification Failure"
+  action_group_name          = "${module.claim-issue-failure-action-group.action_group_name}"
+  custom_email_subject       = "Claim Issue Notification Failure"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = "${azurerm_resource_group.rg.name}"
