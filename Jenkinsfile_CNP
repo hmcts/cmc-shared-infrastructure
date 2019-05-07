@@ -2,16 +2,6 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-import uk.gov.hmcts.contino.Environment
-
-Environment environment = new Environment(env)
-
-onMaster {
-  sharedInfrastructurePipeline('cmc', environment.nonProdName, 'nonprod')
-  sharedInfrastructurePipeline('cmc', environment.demoName, 'nonprod')
-  sharedInfrastructurePipeline('cmc', environment.prodName, 'prod')
-}
-
-onPR {
-  sharedInfrastructurePipeline('cmc', environment.nonProdName, 'nonprod', true)
+withInfraPipeline("cmc") {
+  enableSlackNotifications("#cmc-tech-notification")
 }
