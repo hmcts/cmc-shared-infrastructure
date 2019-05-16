@@ -104,7 +104,7 @@ module "claim-issue-failure-action-group" {
 
   resourcegroup_name     = "${azurerm_resource_group.rg.name}"
   action_group_name      = "Claim Issue Failure Alert - ${var.env}"
-  short_name             = "claim_issue_failure_alert"
+  short_name             = "clmisu_alert"
   email_receiver_name    = "Claim Issue Failure Alerts"
   email_receiver_address = "${data.azurerm_key_vault_secret.claim_issue_email_secret.value}"
 }
