@@ -1,7 +1,10 @@
 #!groovy
+
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-withInfraPipeline("cmc") {
-  enableSlackNotifications("#cmc-tech-notification")
+def product = 'cmc'
+
+withInfraPipeline(product) {
+  enableSlackNotifications('#cmc-tech-notification')
 }

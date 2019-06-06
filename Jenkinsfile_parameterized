@@ -5,8 +5,10 @@
 //noinspection GroovyAssignabilityCheck
 properties([
 		parameters([
-			choice(name: 'ENVIRONMENT', choices: 'saat\nsprod\nsandbox', description: 'Environment where code should be build and deployed')
+			choice(name: 'ENVIRONMENT', choices: 'sandbox\nsaat\nsprod', description: 'Environment where code should be build and deployed')
 		])
 ])
 
-sharedInfrastructurePipeline('cmc', params.ENVIRONMENT, 'sandbox')
+withParameterizedInfraPipeline('cmc', params.ENVIRONMENT, 'sandbox') {
+    enableSlackNotifications('#cmc-tech-notification')
+}
