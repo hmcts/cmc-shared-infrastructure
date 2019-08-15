@@ -85,7 +85,6 @@ module "cmc-ff4j-admissions-fail-alert" {
   resourcegroup_name         = "${azurerm_resource_group.rg.name}"
 }
 
-
 module "claim-issue-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
