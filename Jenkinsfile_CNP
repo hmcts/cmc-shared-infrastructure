@@ -2,7 +2,7 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-after('Apply cmc in aat') {
+before('buildinfra:sandbox') {
   error('Stopping pipeline before PROD')
 }
 
