@@ -2,6 +2,10 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
+after('Apply cmc in aat') {
+  error('Stopping pipeline before PROD')
+}
+
 withInfraPipeline("cmc") {
   enableSlackNotifications("#cmc-tech-notification")
 }
