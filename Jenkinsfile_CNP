@@ -2,10 +2,6 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-before('buildinfra:sandbox') {
-  error('Stopping pipeline before PROD')
-}
-
 withInfraPipeline("cmc") {
   enableSlackNotifications("#cmc-tech-notification")
 }
