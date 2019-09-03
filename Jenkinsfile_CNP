@@ -1,6 +1,6 @@
 #!groovy
 //noinspection GroovyUnusedAssignment
-@Library("Infrastructure@cmc-prs-apply-in-aat") _
+@Library("Infrastructure") _
 
 withInfraPipeline("cmc") {
   enableSlackNotifications("#cmc-tech-notification")
