@@ -1,6 +1,6 @@
 az network application-gateway waf-config set \
---resource-group cmc-aat \
---gateway-name cmc-aat \
+--resource-group cmc-demo \
+--gateway-name cmc-demo \
 --enabled true \
 --firewall-mode Prevention \
 --rule-set-version 3.0 \
@@ -14,6 +14,7 @@ az network application-gateway waf-config set \
 920440 \
 921110 \
 930130 \
+931130 \
 932100 \
 932105 \
 932110 \
