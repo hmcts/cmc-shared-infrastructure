@@ -15,6 +15,7 @@ locals {
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
+  # using a specific branch for WAF rule exceptions only applicable to CMC
   source                  = "git@github.com:hmcts/cnp-module-waf?ref=cmc-in-prevention-mode"
   env                     = "${var.env}"
   subscription            = "${var.subscription}"
