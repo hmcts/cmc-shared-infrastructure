@@ -102,3 +102,21 @@ module "claim-issue-fail-alert" {
   trigger_threshold          = 0
   resourcegroup_name         = "${azurerm_resource_group.rg.name}"
 }
+
+module "milo-report-fail-alert" {
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
+  location          = "${azurerm_application_insights.appinsights.location}"
+  app_insights_name = "${azurerm_application_insights.appinsights.name}"
+
+  alert_name                 = "milo-report-fail-alert"
+  alert_desc                 = "Triggers when a Mediation report failure event is received from CMC in a 1 hour poll."
+  app_insights_query         = "customEvents | where name == \"Mediation Report - failure\""
+  frequency_in_minutes       = 60
+  time_window_in_minutes     = 60
+  severity_level             = "3"
+  action_group_name          = "${module.milo-report-failure-action-group.action_group_name}"
+  custom_email_subject       = "MILO Report Failure"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = 0
+  resourcegroup_name         = "${azurerm_resource_group.rg.name}"
+}

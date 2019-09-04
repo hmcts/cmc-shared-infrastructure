@@ -112,3 +112,26 @@ module "claim-issue-failure-action-group" {
 output "claim_issue_failure_action_group_name" {
   value = "${module.claim-issue-failure-action-group.action_group_name}"
 }
+
+// MILO report failure
+
+data "azurerm_key_vault_secret" "milo_report_email_secret" {
+  name = "milo-report-failure-email"
+  vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
+}
+
+module "milo-report-failure-action-group" {
+  source   = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env      = "${var.env}"
+
+  resourcegroup_name     = "${azurerm_resource_group.rg.name}"
+  action_group_name      = "MILO Report Failure Alert - ${var.env}"
+  short_name             = "milo_alert"
+  email_receiver_name    = "MILO Report Failure Alerts"
+  email_receiver_address = "${data.azurerm_key_vault_secret.milo_report_email_secret.value}"
+}
+
+output "milo_report_failure_action_group_name" {
+  value = "${module.milo-report-failure-action-group.action_group_name}"
+}
