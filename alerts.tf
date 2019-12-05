@@ -127,7 +127,7 @@ module "ordnance-keys-expired-alert" {
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
   alert_name                 = "ordnance-keys-expired-alert"
-  alert_desc                 = "Triggers when an Ordnance keys not working event is received from CMC in a 1 hour poll."
+  alert_desc                 = "Triggers when an Ordnance keys not working event is received from CMC every day poll."
   app_insights_query         = "customEvents | where name == \"Ordnance Keys - expired\""
   frequency_in_minutes       = 1440
   time_window_in_minutes     = 1440
