@@ -150,7 +150,7 @@ module "ordnance-survey-keys-expiry-action-group" {
 
   resourcegroup_name     = "${azurerm_resource_group.rg.name}"
   action_group_name      = "Ordnance Survery Keys Expired Alert - ${var.env}"
-  short_name             = "ordnance_alert"
+  short_name             = "ordn_alert"
   email_receiver_name    = "Ordnance Survery Keys Expired Alerts"
   email_receiver_address = "${data.azurerm_key_vault_secret.ordnance_report_email_secret.value}"
 }
