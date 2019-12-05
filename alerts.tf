@@ -132,7 +132,7 @@ module "ordnance-keys-expired-alert" {
   frequency_in_minutes       = 60
   time_window_in_minutes     = 60
   severity_level             = "3"
-  action_group_name          = "${module.milo-report-failure-action-group.action_group_name}"
+  action_group_name          = "${module.ordnance-survey-keys-expiry-action-group.action_group_name}"
   custom_email_subject       = "Ordnance Keys Expired"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
