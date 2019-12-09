@@ -135,3 +135,26 @@ module "milo-report-failure-action-group" {
 output "milo_report_failure_action_group_name" {
   value = "${module.milo-report-failure-action-group.action_group_name}"
 }
+
+// Ordnance Survey keys expiry
+
+data "azurerm_key_vault_secret" "ordnance_report_email_secret" {
+  name = "ordnance-survey-keys-expiry-email"
+  vault_uri = "${data.azurerm_key_vault.cmc_key_vault.vault_uri}"
+}
+
+module "ordnance-survey-keys-expiry-action-group" {
+  source   = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env      = "${var.env}"
+
+  resourcegroup_name     = "${azurerm_resource_group.rg.name}"
+  action_group_name      = "Ordnance Survery Keys Expired Alert - ${var.env}"
+  short_name             = "ordn_alert"
+  email_receiver_name    = "Ordnance Survery Keys Expired Alerts"
+  email_receiver_address = "${data.azurerm_key_vault_secret.ordnance_report_email_secret.value}"
+}
+
+output "ordnance_survey_keys_action_group_name" {
+  value = "${module.ordnance-survey-keys-expiry-action-group.action_group_name}"
+}

@@ -120,3 +120,21 @@ module "milo-report-fail-alert" {
   trigger_threshold          = 0
   resourcegroup_name         = "${azurerm_resource_group.rg.name}"
 }
+
+module "ordnance-keys-expired-alert" {
+  source            = "git@github.com:hmcts/cnp-module-metric-alert"
+  location          = "${azurerm_application_insights.appinsights.location}"
+  app_insights_name = "${azurerm_application_insights.appinsights.name}"
+
+  alert_name                 = "ordnance-keys-expired-alert"
+  alert_desc                 = "Triggers when an Ordnance keys not working event is received from CMC in a daily poll."
+  app_insights_query         = "customEvents | where name == \"Ordnance Keys - expired\""
+  frequency_in_minutes       = 1440
+  time_window_in_minutes     = 1440
+  severity_level             = "3"
+  action_group_name          = "${module.ordnance-survey-keys-expiry-action-group.action_group_name}"
+  custom_email_subject       = "Ordnance Keys Expired"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = 0
+  resourcegroup_name         = "${azurerm_resource_group.rg.name}"
+}
