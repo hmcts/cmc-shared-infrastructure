@@ -19,7 +19,7 @@ The following parameters are optional
 - `appinsights_location` Location for Application Insights. Default is "West Europe".
 - `application_type` Type of Application Insights (Web/Other). Default is "Web".
 
-### Output
+### Output 
 
 - `appInsightsInstrumentationKey` The instrumentation key for the application insights instance.
 - `vaultName` The name of the key vault.
