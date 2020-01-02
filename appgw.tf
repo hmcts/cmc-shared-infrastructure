@@ -56,6 +56,10 @@ module "appGwSouth" {
       Protocol                = "Http"
       SslCertificate          = ""
       hostName                = "${var.citizen_external_hostname}"
+      custom_error_configuration = {
+        status_code = 403
+        custom_error_page_url = "http://${var.citizen_external_hostname}/waf.html"
+      }
     },
     {
       name                    = "citizen-https-listener"
@@ -64,6 +68,10 @@ module "appGwSouth" {
       Protocol                = "Https"
       SslCertificate          = "${var.citizen_external_cert_name}${local.citizen_cert_suffix}"
       hostName                = "${var.citizen_external_hostname}"
+      custom_error_configuration = {
+        status_code = 403
+        custom_error_page_url = "https://${var.citizen_external_hostname}/waf.html"
+      }
     },
     {
       # Legal
