@@ -2,6 +2,7 @@ locals {
   tags = "${merge(var.common_tags,
     map("Team Contact", "${var.team_contact}")
     )}"
+  DUMMY_VAR = TRUE
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -10,5 +11,3 @@ resource "azurerm_resource_group" "rg" {
 
   tags = "${local.tags}"
 }
-
-DUMMY_VAR = TRUE
