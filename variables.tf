@@ -58,3 +58,7 @@ variable "ilbIp" {}
 variable "managed_identity_object_id" {
   default = ""
 }
+
+variable "dummy_var" {
+  default = ""
+}
