@@ -20,7 +20,7 @@ variable "env" {}
 
 variable "application_type" {
   type        = "string"
-  default     = "Web"
+  default     = "web"
   description = "Type of Application Insights (Web/Other)"
 }
 
@@ -57,4 +57,9 @@ variable "ilbIp" {}
 
 variable "managed_identity_object_id" {
   default = ""
+}
+
+variable "sku" {
+  default     = "standard"
+  description = "The Name of the SKU used for this Key Vault. Possible values are standard and premium."
 }
