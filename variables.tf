@@ -1,13 +1,11 @@
 variable "product" {}
 
 variable "location" {
-  type    = "string"
   default = "UK South"
 }
 
 // as of now, UK South is unavailable for Application Insights
 variable "appinsights_location" {
-  type        = "string"
   default     = "West Europe"
   description = "Location for Application Insights"
 }
@@ -19,7 +17,6 @@ variable "common_tags" {
 variable "env" {}
 
 variable "application_type" {
-  type        = "string"
   default     = "web"
   description = "Type of Application Insights (Web/Other)"
 }
