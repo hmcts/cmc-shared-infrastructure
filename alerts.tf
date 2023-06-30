@@ -19,6 +19,7 @@ AIQ
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "cmc-bulk-print-fail-alert" {
@@ -37,6 +38,7 @@ module "cmc-bulk-print-fail-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "cmc-pdf-fail-alert" {
@@ -65,6 +67,7 @@ AIQ
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "cmc-ff4j-admissions-fail-alert" {
@@ -83,6 +86,7 @@ module "cmc-ff4j-admissions-fail-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "citizen-notification-fail-alert" {
@@ -101,6 +105,7 @@ module "citizen-notification-fail-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "milo-report-fail-alert" {
@@ -119,6 +124,7 @@ module "milo-report-fail-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "ordnance-keys-expired-alert" {
@@ -137,4 +143,5 @@ module "ordnance-keys-expired-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 0
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
