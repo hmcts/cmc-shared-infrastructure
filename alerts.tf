@@ -11,14 +11,15 @@ customEvents
 | where name == "Document management upload - failure" or name == "Document management download - failure"
 AIQ
 
-  frequency_in_minutes       = 5
-  time_window_in_minutes     = 5
+  frequency_in_minutes       = "5"
+  time_window_in_minutes     = "5"
   severity_level             = "3"
   action_group_name          = module.cmc-doc-mgt-failure-action-group.action_group_name
   custom_email_subject       = "CMC Document Management Failure"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "cmc-bulk-print-fail-alert" {
@@ -29,14 +30,15 @@ module "cmc-bulk-print-fail-alert" {
   alert_name                 = "cmc-bulk-print-fail-alert"
   alert_desc                 = "Triggers when a bulk print failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"Bulk print failed\""
-  frequency_in_minutes       = 5
-  time_window_in_minutes     = 5
+  frequency_in_minutes       = "5"
+  time_window_in_minutes     = "5"
   severity_level             = "3"
   action_group_name          = module.cmc-bulk-print-fail-action-group.action_group_name
   custom_email_subject       = "CMC Bulk Print Failure"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "cmc-pdf-fail-alert" {
@@ -57,14 +59,15 @@ requests
 | project timestamp, operation_Id, url, name, dimensions
 AIQ
 
-  frequency_in_minutes       = 30
-  time_window_in_minutes     = 30
+  frequency_in_minutes       = "30"
+  time_window_in_minutes     = "30"
   severity_level             = "3"
   action_group_name          = module.cmc-pdf-fail-action-group.action_group_name
   custom_email_subject       = "CMC PDF Failure"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "cmc-ff4j-admissions-fail-alert" {
@@ -75,14 +78,15 @@ module "cmc-ff4j-admissions-fail-alert" {
   alert_name                 = "cmc-ff4j-admissions-fail-alert"
   alert_desc                 = "Triggers when a ff4J cmc_admissions failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"ff4J cmc_admissions failure\""
-  frequency_in_minutes       = 5
-  time_window_in_minutes     = 5
+  frequency_in_minutes       = "5"
+  time_window_in_minutes     = "5"
   severity_level             = "3"
   action_group_name          = module.cmc-ff4j-admissions-fail-action-group.action_group_name
   custom_email_subject       = "CMC FF4J CMC_Admissions Failure"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "citizen-notification-fail-alert" {
@@ -93,14 +97,15 @@ module "citizen-notification-fail-alert" {
   alert_name                 = "citizen-notification-fail-alert"
   alert_desc                 = "Triggers when a Citizen notificaiton email failure event is received from CMC in a 5 minute poll."
   app_insights_query         = "customEvents | where name == \"Notification - failure\""
-  frequency_in_minutes       = 5
-  time_window_in_minutes     = 5
+  frequency_in_minutes       = "5"
+  time_window_in_minutes     = "5"
   severity_level             = "3"
   action_group_name          = module.claim-issue-failure-action-group.action_group_name
   custom_email_subject       = "Citizen Notification Failure"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "milo-report-fail-alert" {
@@ -111,14 +116,15 @@ module "milo-report-fail-alert" {
   alert_name                 = "milo-report-fail-alert"
   alert_desc                 = "Triggers when a Mediation report failure event is received from CMC in a 1 hour poll."
   app_insights_query         = "customEvents | where name == \"Mediation Report - failure\""
-  frequency_in_minutes       = 60
-  time_window_in_minutes     = 60
+  frequency_in_minutes       = "60"
+  time_window_in_minutes     = "60"
   severity_level             = "3"
   action_group_name          = module.milo-report-failure-action-group.action_group_name
   custom_email_subject       = "MILO Report Failure"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
 
 module "ordnance-keys-expired-alert" {
@@ -129,12 +135,13 @@ module "ordnance-keys-expired-alert" {
   alert_name                 = "ordnance-keys-expired-alert"
   alert_desc                 = "Triggers when an Ordnance keys not working event is received from CMC in a daily poll."
   app_insights_query         = "customEvents | where name == \"Ordnance Keys - expired\""
-  frequency_in_minutes       = 1440
-  time_window_in_minutes     = 1440
+  frequency_in_minutes       = "1440"
+  time_window_in_minutes     = "1440"
   severity_level             = "3"
   action_group_name          = module.ordnance-survey-keys-expiry-action-group.action_group_name
   custom_email_subject       = "Ordnance Keys Expired"
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 0
+  trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
 }
