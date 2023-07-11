@@ -9,6 +9,7 @@ module "cmc-vault" {
   product_group_object_id    = "68839600-92da-4862-bb24-1259814d1384"
   common_tags                = local.tags
   managed_identity_object_id = var.managed_identity_object_id
+  create_managed_identity    = true
 }
 
 data "azurerm_key_vault" "cmc_key_vault" {
