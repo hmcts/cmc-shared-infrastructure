@@ -1,12 +1,14 @@
 provider "azurerm" {
-  version = "2.45.1"
+  version = "3.64.0"
   features {}
 }
 
 locals {
   tags = merge(var.common_tags,
-    map("Team Contact", var.team_contact)
-    )
+    tomap({
+      "Team Contact" = "${var.team_contact}"
+    })
+  )
 }
 
 resource "azurerm_resource_group" "rg" {
