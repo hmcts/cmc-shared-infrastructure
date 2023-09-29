@@ -2,6 +2,7 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
+
 withInfraPipeline("cmc") {
   enableSlackNotifications("#cmc-tech-notification")
 }
