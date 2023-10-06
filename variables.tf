@@ -53,11 +53,6 @@ variable "legal_external_cert_vault_uri" {}
 variable "ilbIp" {
   default = ""
 }
-
-variable "managed_identity_object_id" {
-  default = ""
-}
-
 variable "sku" {
   default     = "standard"
   description = "The Name of the SKU used for this Key Vault. Possible values are standard and premium."
