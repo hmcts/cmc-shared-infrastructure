@@ -1,7 +1,7 @@
 module "cmc-doc-mgt-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name = "cmc-doc-mgt-fail-alert"
   alert_desc = "Triggers when a Document Management upload or download failure event is received from CMC in a 5 minute poll."
@@ -24,8 +24,8 @@ AIQ
 
 module "cmc-bulk-print-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name                 = "cmc-bulk-print-fail-alert"
   alert_desc                 = "Triggers when a bulk print failure event is received from CMC in a 5 minute poll."
@@ -43,8 +43,8 @@ module "cmc-bulk-print-fail-alert" {
 
 module "cmc-pdf-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name = "cmc-pdf-fail-alert"
   alert_desc = "Triggers when a PDF failure event is received from CMC in a 30 minute poll."
@@ -72,8 +72,8 @@ AIQ
 
 module "cmc-ff4j-admissions-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name                 = "cmc-ff4j-admissions-fail-alert"
   alert_desc                 = "Triggers when a ff4J cmc_admissions failure event is received from CMC in a 5 minute poll."
@@ -91,8 +91,8 @@ module "cmc-ff4j-admissions-fail-alert" {
 
 module "citizen-notification-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name                 = "citizen-notification-fail-alert"
   alert_desc                 = "Triggers when a Citizen notificaiton email failure event is received from CMC in a 5 minute poll."
@@ -110,8 +110,8 @@ module "citizen-notification-fail-alert" {
 
 module "milo-report-fail-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name                 = "milo-report-fail-alert"
   alert_desc                 = "Triggers when a Mediation report failure event is received from CMC in a 1 hour poll."
@@ -129,8 +129,8 @@ module "milo-report-fail-alert" {
 
 module "ordnance-keys-expired-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
-  location          = azurerm_application_insights.appinsights.location
-  app_insights_name = azurerm_application_insights.appinsights.name
+  location          = module.application_insights.location
+  app_insights_name = module.application_insights.name
 
   alert_name                 = "ordnance-keys-expired-alert"
   alert_desc                 = "Triggers when an Ordnance keys not working event is received from CMC in a daily poll."
