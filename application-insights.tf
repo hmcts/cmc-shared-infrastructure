@@ -20,8 +20,8 @@ resource "azurerm_key_vault_secret" "appInsights-InstrumentationKey" {
   key_vault_id = module.cmc-vault.key_vault_id
 }
 
-resource "azurerm_key_vault_secret" "app_insights_connection_string" {
-  name         = "app-insights-connection-string"
+resource "azurerm_key_vault_secret" "appinsights_connection_string" {
+  name         = "appinsights-connection-string"
   value        = module.application_insights.connection_string
   key_vault_id = module.cmc-vault.key_vault_id
 }
