@@ -1,7 +1,7 @@
 // Bulk print failures
 
 data "azurerm_key_vault_secret" "bpf_email_secret" {
-  name      = "bulk-print-failure-email"
+  name         = "bulk-print-failure-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
@@ -24,7 +24,7 @@ output "bpf_action_group_name" {
 // PDF service failures
 
 data "azurerm_key_vault_secret" "pdf_fail_email_secret" {
-  name      = "pdf-failure-email"
+  name         = "pdf-failure-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
@@ -47,7 +47,7 @@ output "pdf_action_group_name" {
 // CMC Admission Failures
 
 data "azurerm_key_vault_secret" "ff4j_email_secret" {
-  name      = "ff4j-admissions-failure-email"
+  name         = "ff4j-admissions-failure-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
@@ -70,7 +70,7 @@ output "ff4j_failure_action_group_name" {
 // CMC Document Management Failure
 
 data "azurerm_key_vault_secret" "doc_mgt_email_secret" {
-  name      = "document-management-failure-email"
+  name         = "document-management-failure-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
@@ -93,7 +93,7 @@ output "doc_mgmt_failure_action_group_name" {
 // Notification Failure
 
 data "azurerm_key_vault_secret" "claim_issue_email_secret" {
-  name      = "claim-issue-failure-email"
+  name         = "claim-issue-failure-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
@@ -116,7 +116,7 @@ output "claim_issue_failure_action_group_name" {
 // MILO report failure
 
 data "azurerm_key_vault_secret" "milo_report_email_secret" {
-  name = "milo-report-failure-email"
+  name         = "milo-report-failure-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
@@ -139,7 +139,7 @@ output "milo_report_failure_action_group_name" {
 // Ordnance Survey keys expiry
 
 data "azurerm_key_vault_secret" "ordnance_report_email_secret" {
-  name = "ordnance-survey-keys-expiry-email"
+  name         = "ordnance-survey-keys-expiry-email"
   key_vault_id = data.azurerm_key_vault.cmc_key_vault.id
 }
 
