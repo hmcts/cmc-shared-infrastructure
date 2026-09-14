@@ -9,6 +9,7 @@ module "cmc-bulk-print-fail-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "Bulk Print Fail Alert - ${var.env}"
@@ -56,6 +57,7 @@ module "cmc-ff4j-admissions-fail-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "ff4j Admissions Failure Alert - ${var.env}"
@@ -79,6 +81,7 @@ module "cmc-doc-mgt-failure-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "Document Management Failure Alert - ${var.env}"
@@ -102,6 +105,7 @@ module "claim-issue-failure-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "Claim Issue Failure Alert - ${var.env}"
@@ -125,6 +129,7 @@ module "milo-report-failure-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "MILO Report Failure Alert - ${var.env}"
