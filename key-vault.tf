@@ -4,7 +4,7 @@ data "azurerm_user_assigned_identity" "jenkins" {
 }
 
 module "cmc-vault" {
-  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-31965/remove-jenkins-ptl-access"
+  source                  = "git@github.com:hmcts/cnp-module-key-vault"
   name                    = "cmc-${var.env}"
   product                 = var.product
   env                     = var.env
